@@ -24,7 +24,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "taskflow:build"
+        "buildTarget": "taskflow:build",
+        "proxyConfig": "apps/taskflow/proxy.conf.json"
       },
       "configurations": {
         "development": {

@@ -5,7 +5,31 @@
  Delete this file and get started with your project!
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
+interface ApiResponse {
+  message: string;
+}
+
+
 export function NxWelcome({ title }: { title: string }) {
+  const [data, setData] = useState<ApiResponse | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<ApiResponse>('http://localhost:3333/api');
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <style
@@ -419,7 +443,7 @@ export function NxWelcome({ title }: { title: string }) {
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
-              Welcome {title} 👋
+              Welcome {data?.message} 👋
             </h1>
           </div>
 
